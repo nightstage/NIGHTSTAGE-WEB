@@ -1,0 +1,74 @@
+---
+const title = "Nightstage Hello World";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg-start: #0f172a;
+        --bg-end: #1d4ed8;
+        --card: rgba(255, 255, 255, 0.12);
+        --text: #eff6ff;
+        --accent: #fbbf24;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: Georgia, "Times New Roman", serif;
+        background:
+          radial-gradient(circle at top, rgba(251, 191, 36, 0.2), transparent 28%),
+          linear-gradient(135deg, var(--bg-start), var(--bg-end));
+        color: var(--text);
+      }
+
+      main {
+        width: min(90vw, 720px);
+        padding: 3rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 28px;
+        background: var(--card);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 24px 80px rgba(15, 23, 42, 0.35);
+      }
+
+      h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2.5rem, 7vw, 4.75rem);
+        line-height: 0.95;
+      }
+
+      p {
+        margin: 0;
+        font-size: clamp(1.1rem, 2vw, 1.35rem);
+        line-height: 1.6;
+        max-width: 34rem;
+      }
+
+      strong {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Hello World</h1>
+      <p>
+        Este proyecto en <strong>Astro</strong> ya esta listo para arrancar, probar y
+        publicar en GitHub con la cuenta de Nightstage.
+      </p>
+    </main>
+  </body>
+</html>
