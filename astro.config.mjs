@@ -1,8 +1,7 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://nightstage.github.io",
-  base: "/NIGHTSTAGE-WEB",
+  site: "https://nightstage-es.com",
   server: {
     host: true,
     port: 4321
