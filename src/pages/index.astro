@@ -1,5 +1,42 @@
 ---
-const title = "Nightstage Central";
+const title = "NIGHTSTAGE | DJ para eventos en Madrid";
+const description =
+  "DJ profesional para bodas, empresas y celebraciones en Madrid. Sonido, iluminacion y una pista preparada para cada momento.";
+const phone = "685 221 949";
+const phoneHref = "tel:+34685221949";
+const address = "Calle de Alcantara, 19, Salamanca, 28006 Madrid";
+const email = "info@nightstage-es.com";
+
+const services = [
+  {
+    eyebrow: "Bodas",
+    title: "Ceremonia, coctel y fiesta",
+    copy: "Una sesion pensada para acompanar cada tramo del dia y cerrar con una pista llena.",
+    image:
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=82",
+  },
+  {
+    eyebrow: "Empresa",
+    title: "Eventos corporativos",
+    copy: "Ambientacion elegante para cenas, presentaciones, networking y celebraciones de equipo.",
+    image:
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=82",
+  },
+  {
+    eyebrow: "Celebraciones",
+    title: "Cumples, comuniones y fiestas",
+    copy: "Musica adaptable por edades, energia y estilo para que nadie se quede fuera.",
+    image:
+      "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=900&q=82",
+  },
+];
+
+const steps = [
+  "Escuchamos el plan del evento",
+  "Preparamos musica y tiempos",
+  "Montamos sonido e iluminacion",
+  "Cuidamos la pista hasta el cierre",
+];
 ---
 
 <!doctype html>
@@ -7,69 +44,785 @@ const title = "Nightstage Central";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
     <title>{title}</title>
     <style>
       :root {
-        color-scheme: light;
-        --bg-start: #0f172a;
-        --bg-end: #1d4ed8;
-        --card: rgba(255, 255, 255, 0.12);
-        --text: #eff6ff;
-        --accent: #fbbf24;
+        color-scheme: dark;
+        --ink: #050505;
+        --panel: #101010;
+        --panel-soft: #171717;
+        --line: #2a2a2a;
+        --text: #f7f4ee;
+        --muted: #c7c0b7;
+        --acid: #d7ff3f;
+        --teal: #23d6c8;
+        --rose: #ff4f87;
+        --white: #ffffff;
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        font-family: Georgia, "Times New Roman", serif;
-        background:
-          radial-gradient(circle at top, rgba(251, 191, 36, 0.2), transparent 28%),
-          linear-gradient(135deg, var(--bg-start), var(--bg-end));
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: var(--ink);
         color: var(--text);
       }
 
-      main {
-        width: min(90vw, 720px);
-        padding: 3rem;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 28px;
-        background: var(--card);
-        backdrop-filter: blur(18px);
-        box-shadow: 0 24px 80px rgba(15, 23, 42, 0.35);
+      body::selection {
+        background: var(--acid);
+        color: var(--ink);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(5, 5, 5, 0.72);
+        backdrop-filter: blur(16px);
+      }
+
+      .nav {
+        width: min(1180px, calc(100% - 32px));
+        min-height: 72px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 900;
+        font-size: 1rem;
+        letter-spacing: 0;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(215, 255, 63, 0.8);
+        border-radius: 8px;
+        background: var(--acid);
+        color: var(--ink);
+      }
+
+      .nav-links {
+        display: none;
+        align-items: center;
+        gap: 22px;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .nav-links a:hover {
+        color: var(--white);
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        padding: 0 18px;
+        font-weight: 800;
+        letter-spacing: 0;
+        transition:
+          transform 160ms ease,
+          border-color 160ms ease,
+          background 160ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button.primary {
+        background: var(--acid);
+        color: var(--ink);
+      }
+
+      .button.ghost {
+        border-color: rgba(255, 255, 255, 0.34);
+        background: rgba(0, 0, 0, 0.26);
+        color: var(--white);
+      }
+
+      .hero {
+        min-height: 86svh;
+        padding: 116px 0 72px;
+        display: grid;
+        align-items: end;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background-image:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.58) 46%, rgba(0, 0, 0, 0.22)),
+          linear-gradient(0deg, rgba(5, 5, 5, 0.95), rgba(5, 5, 5, 0.1) 48%),
+          url("https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1800&q=84");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+          linear-gradient(135deg, rgba(35, 214, 200, 0.22), transparent 34%),
+          linear-gradient(310deg, rgba(255, 79, 135, 0.2), transparent 38%);
+        mix-blend-mode: screen;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .hero-content {
+        max-width: 760px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 18px;
+        color: var(--acid);
+        font-size: 0.88rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 34px;
+        height: 2px;
+        background: currentColor;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
       }
 
       h1 {
-        margin: 0 0 1rem;
-        font-size: clamp(2.5rem, 7vw, 4.75rem);
-        line-height: 0.95;
+        max-width: 720px;
+        font-size: 3.35rem;
+        line-height: 0.96;
+        letter-spacing: 0;
       }
 
-      p {
+      .hero-copy {
+        max-width: 620px;
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 1.15rem;
+        line-height: 1.7;
+      }
+
+      .hero-actions {
+        margin-top: 32px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .stat {
+        min-height: 138px;
+        padding: 24px;
+        background: var(--panel);
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--white);
+        font-size: 2.1rem;
+        line-height: 1;
+      }
+
+      .stat span {
+        display: block;
+        margin-top: 10px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      section {
+        padding: 84px 0;
+      }
+
+      .section-head {
+        display: grid;
+        gap: 16px;
+        margin-bottom: 38px;
+      }
+
+      .section-kicker {
+        color: var(--teal);
+        font-size: 0.86rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        max-width: 760px;
+        font-size: 2.35rem;
+        line-height: 1.06;
+        letter-spacing: 0;
+      }
+
+      .section-head p {
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 1.06rem;
+        line-height: 1.75;
+      }
+
+      .service-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .service-card {
+        min-height: 520px;
+        display: grid;
+        grid-template-rows: 260px 1fr;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      .service-card figure {
         margin: 0;
-        font-size: clamp(1.1rem, 2vw, 1.35rem);
-        line-height: 1.6;
-        max-width: 34rem;
+        min-height: 0;
       }
 
-      strong {
-        color: var(--accent);
+      .service-body {
+        padding: 24px;
+        display: grid;
+        align-content: start;
+        gap: 14px;
+      }
+
+      .tag {
+        width: fit-content;
+        border: 1px solid rgba(35, 214, 200, 0.55);
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: var(--teal);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        font-size: 1.45rem;
+        line-height: 1.16;
+        letter-spacing: 0;
+      }
+
+      .service-body p,
+      .equipment-copy,
+      .step p,
+      .contact p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .equipment {
+        background:
+          linear-gradient(180deg, var(--panel), var(--ink));
+      }
+
+      .equipment-layout {
+        display: grid;
+        gap: 34px;
+        align-items: center;
+      }
+
+      .equipment-photo {
+        min-height: 420px;
+        margin: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+      }
+
+      .equipment-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .equipment-item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 14px;
+        align-items: start;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .check {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        border-radius: 6px;
+        background: var(--rose);
+        color: var(--white);
+        font-weight: 900;
+      }
+
+      .equipment-item strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .process {
+        background: var(--panel-soft);
+      }
+
+      .steps {
+        display: grid;
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .step {
+        min-height: 180px;
+        padding: 24px;
+        background: var(--panel-soft);
+      }
+
+      .step-number {
+        display: inline-grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        margin-bottom: 26px;
+        border-radius: 8px;
+        background: var(--teal);
+        color: var(--ink);
+        font-weight: 900;
+      }
+
+      .contact {
+        position: relative;
+        overflow: hidden;
+        background-image:
+          linear-gradient(90deg, rgba(5, 5, 5, 0.94), rgba(5, 5, 5, 0.74)),
+          url("https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1800&q=82");
+        background-position: center;
+        background-size: cover;
+      }
+
+      .contact-layout {
+        display: grid;
+        gap: 34px;
+        align-items: start;
+      }
+
+      .contact h2 {
+        max-width: 660px;
+      }
+
+      .contact-panel {
+        display: grid;
+        gap: 16px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.48);
+      }
+
+      .contact-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .contact-row:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .contact-row span {
+        color: var(--muted);
+      }
+
+      .contact-row strong {
+        text-align: right;
+      }
+
+      .site-footer {
+        padding: 28px 0;
+        border-top: 1px solid var(--line);
+        background: var(--ink);
+        color: var(--muted);
+      }
+
+      .footer-inner {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 14px;
+        font-size: 0.92rem;
+      }
+
+      @media (min-width: 720px) {
+        .nav-links {
+          display: flex;
+        }
+
+        .stats {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .service-grid,
+        .steps {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (min-width: 960px) {
+        .hero {
+          min-height: 84svh;
+        }
+
+        h1 {
+          font-size: 5.6rem;
+        }
+
+        h2 {
+          font-size: 3.2rem;
+        }
+
+        .service-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .equipment-layout,
+        .contact-layout {
+          grid-template-columns: 1fr 0.82fr;
+        }
+
+        .steps {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 719px) {
+        .nav {
+          min-height: 66px;
+        }
+
+        .nav .button {
+          min-height: 40px;
+          padding: 0 12px;
+          font-size: 0.88rem;
+        }
+
+        .hero {
+          min-height: 88svh;
+          padding-top: 98px;
+        }
+
+        h1 {
+          font-size: 2.65rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .hero-copy {
+          font-size: 1.03rem;
+        }
+
+        .hero-actions .button {
+          width: 100%;
+        }
+
+        .nav .button {
+          width: auto;
+        }
+
+        .service-card {
+          min-height: 480px;
+        }
+
+        .equipment-photo {
+          min-height: 320px;
+        }
+
+        .contact-row {
+          display: grid;
+        }
+
+        .contact-row strong {
+          text-align: left;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>Nightstage Central</h1>
-      <p>
-        La web oficial de <strong>Nightstage</strong> esta actualmente en desarrollo.
-        Muy pronto compartiremos aqui novedades, contenido y la nueva experiencia
-        digital del proyecto.
-      </p>
+    <header class="site-header">
+      <nav class="nav" aria-label="Principal">
+        <a class="brand" href="#inicio" aria-label="NIGHTSTAGE inicio">
+          <span class="brand-mark">NS</span>
+          <span>NIGHTSTAGE</span>
+        </a>
+        <div class="nav-links" aria-label="Secciones">
+          <a href="#servicios">Servicios</a>
+          <a href="#equipo">Equipo</a>
+          <a href="#proceso">Proceso</a>
+        </div>
+        <a class="button primary" href="#contacto">Pedir fecha</a>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="hero" aria-label="DJ para eventos en Madrid">
+        <div class="shell hero-content">
+          <p class="eyebrow">DJ profesional en Madrid</p>
+          <h1>La pista entra cuando el evento lo pide.</h1>
+          <p class="hero-copy">
+            Sesiones para bodas, empresas y celebraciones privadas con sonido
+            potente, iluminacion cuidada y lectura real de la sala.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#contacto">Consultar disponibilidad</a>
+            <a class="button ghost" href="#servicios">Ver servicios</a>
+          </div>
+        </div>
+      </section>
+
+      <aside class="stats" aria-label="Datos destacados">
+        <div class="stat">
+          <strong>DJ</strong>
+          <span>para bodas, empresas y privados</span>
+        </div>
+        <div class="stat">
+          <strong>Madrid</strong>
+          <span>servicio en ciudad y alrededores</span>
+        </div>
+        <div class="stat">
+          <strong>300 EUR</strong>
+          <span>base orientativa de presupuesto</span>
+        </div>
+        <div class="stat">
+          <strong>Live</strong>
+          <span>musica, sonido, luces y montaje</span>
+        </div>
+      </aside>
+
+      <section id="servicios">
+        <div class="shell">
+          <div class="section-head">
+            <span class="section-kicker">Eventos</span>
+            <h2>Cada celebracion con su tempo, su energia y su final.</h2>
+            <p>
+              Elegimos la musica con el plan sobre la mesa: horarios, invitados,
+              momentos clave y el punto exacto en el que la pista tiene que despegar.
+            </p>
+          </div>
+
+          <div class="service-grid">
+            {
+              services.map((service) => (
+                <article class="service-card">
+                  <figure>
+                    <img src={service.image} alt={service.title} loading="lazy" />
+                  </figure>
+                  <div class="service-body">
+                    <span class="tag">{service.eyebrow}</span>
+                    <h3>{service.title}</h3>
+                    <p>{service.copy}</p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="equipment" id="equipo">
+        <div class="shell equipment-layout">
+          <div>
+            <div class="section-head">
+              <span class="section-kicker">Sonido e iluminacion</span>
+              <h2>Montaje limpio, cabina preparada y una sala que respira musica.</h2>
+              <p>
+                Equipo profesional para espacios privados, fincas, hoteles y salas
+                de empresa en Madrid y alrededores.
+              </p>
+            </div>
+            <div class="equipment-list">
+              <div class="equipment-item">
+                <span class="check">1</span>
+                <div>
+                  <strong>Control DJ profesional</strong>
+                  <p>Mezcla precisa para adaptar estilos, edades y momentos sin cortes bruscos.</p>
+                </div>
+              </div>
+              <div class="equipment-item">
+                <span class="check">2</span>
+                <div>
+                  <strong>Sonido dimensionado</strong>
+                  <p>Potencia ajustada al aforo para mantener claridad en coctel, cena y baile.</p>
+                </div>
+              </div>
+              <div class="equipment-item">
+                <span class="check">3</span>
+                <div>
+                  <strong>Iluminacion de ambiente</strong>
+                  <p>Escenas de color para entrada, primer baile, fiesta y cierre.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <figure class="equipment-photo">
+            <img
+              src="https://images.unsplash.com/photo-1571266028243-d220c6a7edbf?auto=format&fit=crop&w=1200&q=82"
+              alt="Cabina DJ profesional con luces"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="process" id="proceso">
+        <div class="shell">
+          <div class="section-head">
+            <span class="section-kicker">Como trabajamos</span>
+            <h2>Todo queda claro antes de que suene el primer tema.</h2>
+          </div>
+          <div class="steps">
+            {
+              steps.map((step, index) => (
+                <article class="step">
+                  <span class="step-number">{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{step}</h3>
+                  <p>
+                    Agenda, estilo y necesidades tecnicas se preparan con antelacion.
+                  </p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contacto">
+        <div class="shell contact-layout">
+          <div>
+            <p class="eyebrow">Presupuesto y disponibilidad</p>
+            <h2>Cuentanos fecha, lugar y tipo de evento.</h2>
+            <p>
+              Recibiras una propuesta ajustada al espacio, horarios y formato de la
+              celebracion.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href={phoneHref}>Llamar ahora</a>
+              <a class="button ghost" href="#servicios">Revisar servicios</a>
+            </div>
+          </div>
+
+          <div class="contact-panel" aria-label="Informacion de contacto">
+            <div class="contact-row">
+              <span>Zona</span>
+              <strong>Madrid y alrededores</strong>
+            </div>
+            <div class="contact-row">
+              <span>Servicios</span>
+              <strong>Bodas, empresa y celebraciones</strong>
+            </div>
+            <div class="contact-row">
+              <span>Desde</span>
+              <strong>300 EUR segun fecha y montaje</strong>
+            </div>
+            <div class="contact-row">
+              <span>Telefono</span>
+              <strong><a href={phoneHref}>{phone}</a></strong>
+            </div>
+            <div class="contact-row">
+              <span>Direccion</span>
+              <strong>{address}</strong>
+            </div>
+            <div class="contact-row">
+              <span>Email</span>
+              <strong><a href={`mailto:${email}`}>{email}</a></strong>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>NIGHTSTAGE</span>
+        <span>DJ para eventos en Madrid.</span>
+      </div>
+    </footer>
   </body>
 </html>
