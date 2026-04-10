@@ -1,6 +1,5 @@
 ---
-import heroVideoMp4 from "../../assets/video/nightstage-hero-1080.mp4";
-import heroVideoWebm from "../../assets/video/nightstage-hero-4k.webm";
+import heroVideoLoop from "../../assets/video/nightstage-hero-mobile-smooth.mp4";
 
 const title = "DJ para eventos en Madrid | Bodas y empresas | NIGHTSTAGE";
 const description =
@@ -1062,8 +1061,7 @@ const structuredData = {
           poster={heroPoster}
           aria-hidden="true"
         >
-          <source src={heroVideoWebm} type="video/webm" media="(min-width: 900px)" />
-          <source src={heroVideoMp4} type="video/mp4" />
+          <source src={heroVideoLoop} type="video/mp4" />
         </video>
         <div class="shell hero-content">
           <svg class="nightstage-logo hero-logo" viewBox="0 0 520 58" aria-hidden="true">
