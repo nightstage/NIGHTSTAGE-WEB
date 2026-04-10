@@ -6,6 +6,11 @@ const phone = "685 221 949";
 const phoneHref = "tel:+34685221949";
 const address = "Calle de Alcantara, 19, Salamanca, 28006 Madrid";
 const email = "info@nightstage-es.com";
+const emailHref = `mailto:${email}`;
+const year = new Date().getFullYear();
+const youtubeId = "xnsxllY5VPw";
+const heroVideo =
+  `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1`;
 
 const services = [
   {
@@ -55,9 +60,9 @@ const steps = [
         --line: #2a2a2a;
         --text: #f7f4ee;
         --muted: #c7c0b7;
-        --acid: #d7ff3f;
+        --acid: #23d6c8;
         --teal: #23d6c8;
-        --rose: #ff4f87;
+        --rose: #23d6c8;
         --white: #ffffff;
       }
 
@@ -130,7 +135,6 @@ const steps = [
         height: 36px;
         display: grid;
         place-items: center;
-        border: 1px solid rgba(215, 255, 63, 0.8);
         border-radius: 8px;
         background: var(--acid);
         color: var(--ink);
@@ -187,26 +191,40 @@ const steps = [
         position: relative;
         overflow: hidden;
         isolation: isolate;
+        background-image: url("https://img.youtube.com/vi/xnsxllY5VPw/maxresdefault.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .hero-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 0;
+        width: max(100vw, 177.78svh);
+        height: max(56.25vw, 100svh);
+        border: 0;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
       }
 
       .hero::before {
         content: "";
         position: absolute;
         inset: 0;
-        z-index: -2;
+        z-index: 1;
+        pointer-events: none;
         background-image:
           linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.58) 46%, rgba(0, 0, 0, 0.22)),
-          linear-gradient(0deg, rgba(5, 5, 5, 0.95), rgba(5, 5, 5, 0.1) 48%),
-          url("https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1800&q=84");
-        background-size: cover;
-        background-position: center;
+          linear-gradient(0deg, rgba(5, 5, 5, 0.95), rgba(5, 5, 5, 0.1) 48%);
       }
 
       .hero::after {
         content: "";
         position: absolute;
         inset: 0;
-        z-index: -1;
+        z-index: 1;
+        pointer-events: none;
         background:
           linear-gradient(135deg, rgba(35, 214, 200, 0.22), transparent 34%),
           linear-gradient(310deg, rgba(255, 79, 135, 0.2), transparent 38%);
@@ -219,6 +237,8 @@ const steps = [
       }
 
       .hero-content {
+        position: relative;
+        z-index: 2;
         max-width: 760px;
       }
 
@@ -523,9 +543,33 @@ const steps = [
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         justify-content: space-between;
-        gap: 14px;
+        gap: 18px;
         font-size: 0.92rem;
+      }
+
+      .footer-copy {
+        color: var(--text);
+        font-weight: 800;
+      }
+
+      .footer-credit {
+        color: var(--muted);
+      }
+
+      .footer-inner a {
+        color: var(--text);
+        font-weight: 800;
+        text-decoration: underline;
+        text-decoration-color: rgba(35, 214, 200, 0.55);
+        text-underline-offset: 4px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-video {
+          display: none;
+        }
       }
 
       @media (min-width: 720px) {
@@ -642,6 +686,14 @@ const steps = [
 
     <main id="inicio">
       <section class="hero" aria-label="DJ para eventos en Madrid">
+        <iframe
+          class="hero-video"
+          src={heroVideo}
+          title="Video de fondo NIGHTSTAGE"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          aria-hidden="true"
+          tabindex="-1"
+        ></iframe>
         <div class="shell hero-content">
           <p class="eyebrow">DJ profesional en Madrid</p>
           <h1>La pista entra cuando el evento lo pide.</h1>
@@ -784,7 +836,7 @@ const steps = [
             </p>
             <div class="hero-actions">
               <a class="button primary" href={phoneHref}>Llamar ahora</a>
-              <a class="button ghost" href="#servicios">Revisar servicios</a>
+              <a class="button ghost" href={emailHref}>Contacto por correo</a>
             </div>
           </div>
 
@@ -811,7 +863,7 @@ const steps = [
             </div>
             <div class="contact-row">
               <span>Email</span>
-              <strong><a href={`mailto:${email}`}>{email}</a></strong>
+              <strong><a href={emailHref}>{email}</a></strong>
             </div>
           </div>
         </div>
@@ -820,8 +872,11 @@ const steps = [
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <span>NIGHTSTAGE</span>
-        <span>DJ para eventos en Madrid.</span>
+        <span class="footer-copy">Copyright {year} NIGHTSTAGE. Todos los derechos reservados.</span>
+        <span class="footer-credit">
+          Desarrollo web:
+          <a href="https://www.mlabsmusic.com/" target="_blank" rel="noreferrer">M Labs Music</a>
+        </span>
       </div>
     </footer>
   </body>
