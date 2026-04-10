@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="NIGHTSTAGE">
+  <rect width="512" height="512" rx="64" fill="#050505"/>
+  <rect x="72" y="250" width="82" height="12" rx="6" fill="#f7f4ee"/>
+  <rect x="358" y="250" width="82" height="12" rx="6" fill="#f7f4ee"/>
+  <text
+    x="256"
+    y="283"
+    fill="#f7f4ee"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="150"
+    font-weight="700"
+    letter-spacing="14"
+    text-anchor="middle"
+  >NS</text>
+  <rect x="180" y="338" width="152" height="10" rx="5" fill="#23d6c8"/>
+</svg>

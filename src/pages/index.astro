@@ -1,36 +1,52 @@
 ---
-const title = "NIGHTSTAGE | DJ para eventos en Madrid";
+import heroVideoMp4 from "../../assets/video/nightstage-hero-1080.mp4";
+import heroVideoWebm from "../../assets/video/nightstage-hero-4k.webm";
+
+const title = "DJ para eventos en Madrid | Bodas y empresas | NIGHTSTAGE";
 const description =
-  "DJ profesional para bodas, empresas y celebraciones en Madrid. Sonido, iluminacion y una pista preparada para cada momento.";
+  "DJ para eventos en Madrid: bodas, empresas y fiestas privadas. Sonido, iluminacion y cabina profesional. Consulta disponibilidad: 685 221 949.";
+const siteUrl = "https://nightstage-es.com/";
+const businessName = "NIGHTSTAGE";
 const phone = "685 221 949";
 const phoneHref = "tel:+34685221949";
-const address = "Calle de Alcantara, 19, Salamanca, 28006 Madrid";
+const phoneInternational = "+34685221949";
+const streetAddress = "Calle de Alcantara, 19";
+const addressLocality = "Madrid";
+const addressRegion = "Comunidad de Madrid";
+const postalCode = "28006";
+const address = `${streetAddress}, Salamanca, ${postalCode} ${addressLocality}`;
 const email = "info@nightstage-es.com";
 const emailHref = `mailto:${email}`;
 const year = new Date().getFullYear();
 const youtubeId = "xnsxllY5VPw";
-const heroVideo =
-  `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1`;
+const heroPoster = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+const googleMapsReviewsUrl =
+  "https://www.google.com/maps/place/NIGHT+STAGE/@40.4275766,-3.6765617,17z/data=!4m8!3m7!1s0xd422956ba086689:0x50c9273485d0b549!8m2!3d40.4275725!4d-3.6739868!9m1!1b1!16s%2Fg%2F11z0yqvgtg?authuser=0&entry=ttu";
+const googleMapsProfileUrl = "https://maps.google.com/?cid=5821227099889907017";
+const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY || "";
+const googlePlaceQuery = `${businessName}, ${streetAddress}, ${postalCode} ${addressLocality}, Spain`;
+const keywords =
+  "DJ para eventos Madrid, DJ Madrid, DJ bodas Madrid, DJ eventos corporativos Madrid, DJ fiestas privadas Madrid, sonido e iluminacion Madrid";
 
 const services = [
   {
     eyebrow: "Bodas",
-    title: "Ceremonia, coctel y fiesta",
-    copy: "Una sesion pensada para acompanar cada tramo del dia y cerrar con una pista llena.",
+    title: "DJ para bodas en Madrid",
+    copy: "Ceremonia, coctel, cena y fiesta con una sesion pensada para acompanar cada tramo del dia.",
     image:
       "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=82",
   },
   {
     eyebrow: "Empresa",
-    title: "Eventos corporativos",
-    copy: "Ambientacion elegante para cenas, presentaciones, networking y celebraciones de equipo.",
+    title: "DJ para eventos corporativos",
+    copy: "Ambientacion elegante para cenas, presentaciones, networking y celebraciones de equipo en Madrid.",
     image:
       "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=82",
   },
   {
     eyebrow: "Celebraciones",
-    title: "Cumples, comuniones y fiestas",
-    copy: "Musica adaptable por edades, energia y estilo para que nadie se quede fuera.",
+    title: "DJ para fiestas privadas",
+    copy: "Cumpleanos, comuniones y celebraciones con musica adaptable por edades, energia y estilo.",
     image:
       "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=900&q=82",
   },
@@ -42,6 +58,104 @@ const steps = [
   "Montamos sonido e iluminacion",
   "Cuidamos la pista hasta el cierre",
 ];
+
+const faqs = [
+  {
+    question: "Que incluye el servicio de DJ para eventos en Madrid?",
+    answer:
+      "Incluye preparacion musical, cabina DJ, sonido adaptado al espacio, iluminacion de ambiente y coordinacion de los momentos clave del evento.",
+  },
+  {
+    question: "Trabajais en bodas y eventos de empresa?",
+    answer:
+      "Si. NIGHTSTAGE cubre bodas, eventos corporativos, fiestas privadas, comuniones, cumpleanos y celebraciones en Madrid y alrededores.",
+  },
+  {
+    question: "Cuanto cuesta contratar un DJ para eventos en Madrid?",
+    answer:
+      "La base orientativa parte de 300 EUR y se ajusta segun fecha, ubicacion, duracion, aforo y necesidades de sonido e iluminacion.",
+  },
+  {
+    question: "Como puedo consultar disponibilidad?",
+    answer:
+      `Puedes llamar al ${phone}, escribir a ${email} o enviar la fecha, ubicacion y tipo de evento para recibir una propuesta ajustada.`,
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "EntertainmentBusiness",
+      "@id": `${siteUrl}#business`,
+      name: businessName,
+      url: siteUrl,
+      image: heroPoster,
+      logo: heroPoster,
+      description,
+      telephone: phoneInternational,
+      email,
+      priceRange: "Desde 300 EUR",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress,
+        addressLocality,
+        addressRegion,
+        postalCode,
+        addressCountry: "ES",
+      },
+      areaServed: [
+        {
+          "@type": "City",
+          name: "Madrid",
+        },
+        {
+          "@type": "AdministrativeArea",
+          name: "Comunidad de Madrid",
+        },
+      ],
+      sameAs: [`https://www.youtube.com/watch?v=${youtubeId}`, googleMapsProfileUrl],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Servicios de DJ para eventos en Madrid",
+        itemListElement: services.map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.title,
+            areaServed: "Madrid",
+            provider: {
+              "@id": `${siteUrl}#business`,
+            },
+            description: service.copy,
+          },
+        })),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      url: siteUrl,
+      name: `${businessName} - DJ para eventos en Madrid`,
+      publisher: {
+        "@id": `${siteUrl}#business`,
+      },
+      inLanguage: "es-ES",
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}#faq`,
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -50,7 +164,26 @@ const steps = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow" />
+    <meta name="geo.region" content="ES-MD" />
+    <meta name="geo.placename" content="Madrid" />
+    <meta name="theme-color" content="#050505" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={siteUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content={businessName} />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={heroPoster} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={heroPoster} />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     <style>
       :root {
         color-scheme: dark;
@@ -124,20 +257,40 @@ const steps = [
       .brand {
         display: inline-flex;
         align-items: center;
-        gap: 12px;
-        font-weight: 900;
-        font-size: 1rem;
-        letter-spacing: 0;
+        color: var(--text);
       }
 
-      .brand-mark {
-        width: 36px;
-        height: 36px;
-        display: grid;
-        place-items: center;
-        border-radius: 8px;
-        background: var(--acid);
-        color: var(--ink);
+      .nightstage-logo {
+        display: block;
+        overflow: visible;
+        color: currentColor;
+      }
+
+      .brand-logo {
+        width: min(260px, 52vw);
+        height: auto;
+      }
+
+      .hero-logo {
+        width: min(520px, 88vw);
+        height: auto;
+        margin-bottom: 26px;
+        color: rgba(255, 255, 255, 0.92);
+        filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.5));
+      }
+
+      .logo-line {
+        stroke: currentColor;
+        stroke-width: 3;
+        stroke-linecap: square;
+      }
+
+      .logo-text {
+        fill: currentColor;
+        font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: 7px;
       }
 
       .nav-links {
@@ -198,14 +351,14 @@ const steps = [
 
       .hero-video {
         position: absolute;
-        top: 50%;
-        left: 50%;
+        inset: 0;
         z-index: 0;
-        width: max(100vw, 177.78svh);
-        height: max(56.25vw, 100svh);
+        width: 100%;
+        height: 100%;
         border: 0;
+        object-fit: cover;
+        object-position: center;
         pointer-events: none;
-        transform: translate(-50%, -50%);
       }
 
       .hero::before {
@@ -481,6 +634,199 @@ const steps = [
         font-weight: 900;
       }
 
+      .local-seo {
+        background: var(--ink);
+      }
+
+      .seo-points,
+      .faq-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .seo-points {
+        margin-top: 30px;
+      }
+
+      .seo-point,
+      .faq-item {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .seo-point strong,
+      .faq-item h3 {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .seo-point p,
+      .faq-item p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .reviews {
+        background:
+          linear-gradient(180deg, var(--ink), var(--panel-soft));
+      }
+
+      .reviews-panel {
+        display: grid;
+        gap: 22px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .reviews-header {
+        display: grid;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .google-summary {
+        display: grid;
+        gap: 8px;
+      }
+
+      .google-name {
+        color: var(--white);
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .google-name:hover {
+        color: var(--teal);
+      }
+
+      .reviews-note {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .reviews-rating {
+        width: fit-content;
+        border: 1px solid rgba(35, 214, 200, 0.55);
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: var(--teal);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .review-source {
+        width: fit-content;
+        border: 1px solid rgba(251, 188, 4, 0.55);
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: #fbbc04;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .powered-by-google {
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      .google-blue {
+        color: #4285f4;
+      }
+
+      .google-red {
+        color: #ea4335;
+      }
+
+      .google-yellow {
+        color: #fbbc04;
+      }
+
+      .google-green {
+        color: #34a853;
+      }
+
+      .reviews-track {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(260px, 1fr);
+        gap: 14px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scroll-snap-type: x proximity;
+      }
+
+      .review-card {
+        min-height: 230px;
+        display: grid;
+        align-content: start;
+        gap: 16px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: var(--panel);
+        scroll-snap-align: start;
+      }
+
+      .review-author {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .review-avatar {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--teal);
+        color: var(--ink);
+        font-weight: 900;
+      }
+
+      .review-avatar img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        border-radius: inherit;
+      }
+
+      .review-author strong,
+      .review-author span {
+        display: block;
+      }
+
+      .review-author span {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .review-card p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .review-card.is-loading,
+      .review-card.is-empty {
+        min-height: 160px;
+      }
+
+      .faq {
+        background: var(--panel-soft);
+      }
+
       .contact {
         position: relative;
         overflow: hidden;
@@ -582,8 +928,15 @@ const steps = [
         }
 
         .service-grid,
-        .steps {
+        .steps,
+        .seo-points,
+        .reviews-header,
+        .faq-list {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .reviews-header .button {
+          justify-self: end;
         }
       }
 
@@ -650,6 +1003,15 @@ const steps = [
           width: auto;
         }
 
+        .brand-logo {
+          width: min(210px, 46vw);
+        }
+
+        .hero-logo {
+          width: min(360px, 88vw);
+          margin-bottom: 22px;
+        }
+
         .service-card {
           min-height: 480px;
         }
@@ -672,12 +1034,16 @@ const steps = [
     <header class="site-header">
       <nav class="nav" aria-label="Principal">
         <a class="brand" href="#inicio" aria-label="NIGHTSTAGE inicio">
-          <span class="brand-mark">NS</span>
-          <span>NIGHTSTAGE</span>
+          <svg class="nightstage-logo brand-logo" viewBox="0 0 520 58" role="img" aria-label="NIGHT STAGE">
+            <line class="logo-line" x1="0" y1="29" x2="78" y2="29"></line>
+            <text class="logo-text" x="260" y="39" text-anchor="middle">NIGHT STAGE</text>
+            <line class="logo-line" x1="442" y1="29" x2="520" y2="29"></line>
+          </svg>
         </a>
         <div class="nav-links" aria-label="Secciones">
           <a href="#servicios">Servicios</a>
           <a href="#equipo">Equipo</a>
+          <a href="#resenas">Resenas</a>
           <a href="#proceso">Proceso</a>
         </div>
         <a class="button primary" href="#contacto">Pedir fecha</a>
@@ -686,20 +1052,30 @@ const steps = [
 
     <main id="inicio">
       <section class="hero" aria-label="DJ para eventos en Madrid">
-        <iframe
+        <video
           class="hero-video"
-          src={heroVideo}
-          title="Video de fondo NIGHTSTAGE"
-          allow="autoplay; encrypted-media; picture-in-picture"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster={heroPoster}
           aria-hidden="true"
-          tabindex="-1"
-        ></iframe>
+        >
+          <source src={heroVideoWebm} type="video/webm" media="(min-width: 900px)" />
+          <source src={heroVideoMp4} type="video/mp4" />
+        </video>
         <div class="shell hero-content">
-          <p class="eyebrow">DJ profesional en Madrid</p>
-          <h1>La pista entra cuando el evento lo pide.</h1>
+          <svg class="nightstage-logo hero-logo" viewBox="0 0 520 58" aria-hidden="true">
+            <line class="logo-line" x1="0" y1="29" x2="78" y2="29"></line>
+            <text class="logo-text" x="260" y="39" text-anchor="middle">NIGHT STAGE</text>
+            <line class="logo-line" x1="442" y1="29" x2="520" y2="29"></line>
+          </svg>
+          <p class="eyebrow">DJ profesional para eventos en Madrid</p>
+          <h1>DJ para eventos en Madrid con sonido e iluminacion profesional.</h1>
           <p class="hero-copy">
-            Sesiones para bodas, empresas y celebraciones privadas con sonido
-            potente, iluminacion cuidada y lectura real de la sala.
+            NIGHTSTAGE crea sesiones para bodas, empresas y celebraciones privadas
+            con cabina DJ, sonido potente, iluminacion cuidada y lectura real de la sala.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#contacto">Consultar disponibilidad</a>
@@ -711,7 +1087,7 @@ const steps = [
       <aside class="stats" aria-label="Datos destacados">
         <div class="stat">
           <strong>DJ</strong>
-          <span>para bodas, empresas y privados</span>
+          <span>para eventos en Madrid</span>
         </div>
         <div class="stat">
           <strong>Madrid</strong>
@@ -731,7 +1107,7 @@ const steps = [
         <div class="shell">
           <div class="section-head">
             <span class="section-kicker">Eventos</span>
-            <h2>Cada celebracion con su tempo, su energia y su final.</h2>
+            <h2>Servicios de DJ para eventos en Madrid y alrededores.</h2>
             <p>
               Elegimos la musica con el plan sobre la mesa: horarios, invitados,
               momentos clave y el punto exacto en el que la pista tiene que despegar.
@@ -753,6 +1129,38 @@ const steps = [
                 </article>
               ))
             }
+          </div>
+        </div>
+      </section>
+
+      <section class="local-seo" id="dj-para-eventos-madrid">
+        <div class="shell">
+          <div class="section-head">
+            <span class="section-kicker">Madrid</span>
+            <h2>DJ para eventos en Madrid con montaje cuidado de principio a fin.</h2>
+            <p>
+              Trabajamos en Madrid capital y alrededores para bodas, eventos de empresa,
+              fiestas privadas, comuniones y celebraciones que necesitan musica, sonido
+              e iluminacion profesional sin complicaciones.
+            </p>
+          </div>
+          <div class="seo-points">
+            <article class="seo-point">
+              <strong>Servicio local en Madrid</strong>
+              <p>Atendemos eventos en Salamanca, centro de Madrid, fincas, hoteles, restaurantes y espacios privados de la Comunidad de Madrid.</p>
+            </article>
+            <article class="seo-point">
+              <strong>Musica adaptada al publico</strong>
+              <p>Preparamos estilos, momentos clave y transiciones para mantener la energia correcta durante coctel, cena, baile y cierre.</p>
+            </article>
+            <article class="seo-point">
+              <strong>Sonido e iluminacion profesional</strong>
+              <p>Dimensionamos el equipo segun aforo, espacio y horario para que el evento suene claro y tenga presencia visual.</p>
+            </article>
+            <article class="seo-point">
+              <strong>Contacto directo</strong>
+              <p>Consulta disponibilidad por telefono o correo con fecha, lugar, numero de invitados y tipo de evento.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -825,6 +1233,77 @@ const steps = [
         </div>
       </section>
 
+      <section class="reviews" id="resenas">
+        <div class="shell">
+          <div class="section-head">
+            <span class="section-kicker">Resenas</span>
+            <h2>Opiniones reales de NIGHT STAGE en Google.</h2>
+            <p>
+              Las valoraciones se consultan en el perfil publico de Google Maps para
+              ver la informacion actualizada antes de reservar.
+            </p>
+          </div>
+
+          <div class="reviews-panel">
+            <div class="reviews-header">
+              <div class="google-summary">
+                <a class="google-name" href={googleMapsReviewsUrl} target="_blank" rel="nofollow noopener">
+                  NIGHT STAGE en Google
+                </a>
+                <span class="reviews-rating" data-google-rating>Google Maps</span>
+                <span class="reviews-note" data-google-review-count>Resenas verificadas en Google Maps.</span>
+                <span class="powered-by-google" aria-label="Powered by Google">
+                  powered by
+                  <span class="google-blue">G</span><span class="google-red">o</span><span class="google-yellow">o</span><span class="google-blue">g</span><span class="google-green">l</span><span class="google-red">e</span>
+                </span>
+              </div>
+              <a class="button primary" href={googleMapsReviewsUrl} target="_blank" rel="nofollow noopener">
+                Ver resenas en Google
+              </a>
+            </div>
+
+            <div class="reviews-track" aria-label="Resenas de Google" data-google-reviews>
+              <article class="review-card is-loading" data-review-placeholder>
+                <div class="review-author">
+                  <span class="review-avatar">G</span>
+                  <div>
+                    <strong>Resenas de Google</strong>
+                    <span data-google-reviews-status>
+                      {googleMapsApiKey ? "Cargando resenas reales..." : "Resenas verificadas en Google"}
+                    </span>
+                  </div>
+                </div>
+                <span class="review-source">Google Maps</span>
+                <p>
+                  {googleMapsApiKey
+                    ? "Estamos cargando las opiniones verificadas de NIGHT STAGE desde Google."
+                    : "Las opiniones se muestran desde el perfil oficial de NIGHT STAGE en Google Maps."}
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq" id="preguntas-frecuentes">
+        <div class="shell">
+          <div class="section-head">
+            <span class="section-kicker">Preguntas frecuentes</span>
+            <h2>Contratar DJ para eventos en Madrid.</h2>
+          </div>
+          <div class="faq-list">
+            {
+              faqs.map((faq) => (
+                <article class="faq-item">
+                  <h3>{faq.question}</h3>
+                  <p>{faq.answer}</p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
       <section class="contact" id="contacto">
         <div class="shell contact-layout">
           <div>
@@ -879,5 +1358,180 @@ const steps = [
         </span>
       </div>
     </footer>
+    <script
+      is:inline
+      set:html={`window.nightstageGoogleReviews = ${JSON.stringify({
+        hasApiKey: Boolean(googleMapsApiKey),
+        query: googlePlaceQuery,
+        reviewsUrl: googleMapsReviewsUrl,
+      })};`}
+    ></script>
+    <script is:inline>
+      (() => {
+        const config = window.nightstageGoogleReviews || {};
+        const track = document.querySelector("[data-google-reviews]");
+        const ratingEl = document.querySelector("[data-google-rating]");
+        const countEl = document.querySelector("[data-google-review-count]");
+        const statusEl = document.querySelector("[data-google-reviews-status]");
+
+        const setStatus = (message) => {
+          if (statusEl) {
+            statusEl.textContent = message;
+          }
+        };
+
+        const renderEmpty = (message) => {
+          if (!track) {
+            return;
+          }
+
+          track.replaceChildren(createEmptyCard(message));
+        };
+
+        const createEmptyCard = (message) => {
+          const article = document.createElement("article");
+          article.className = "review-card is-empty";
+
+          const author = document.createElement("div");
+          author.className = "review-author";
+
+          const avatar = document.createElement("span");
+          avatar.className = "review-avatar";
+          avatar.textContent = "G";
+
+          const copy = document.createElement("div");
+          const title = document.createElement("strong");
+          title.textContent = "Resenas de Google";
+          const meta = document.createElement("span");
+          meta.textContent = "Google Maps";
+
+          copy.append(title, meta);
+          author.append(avatar, copy);
+
+          const source = document.createElement("span");
+          source.className = "review-source";
+          source.textContent = "Google Maps";
+
+          const text = document.createElement("p");
+          text.textContent = message;
+
+          article.append(author, source, text);
+          return article;
+        };
+
+        const createReviewCard = (review) => {
+          const article = document.createElement("article");
+          article.className = "review-card";
+
+          const author = document.createElement("div");
+          author.className = "review-author";
+
+          const avatar = document.createElement("span");
+          avatar.className = "review-avatar";
+
+          if (review.profile_photo_url) {
+            const photo = document.createElement("img");
+            photo.src = review.profile_photo_url;
+            photo.alt = "";
+            photo.loading = "lazy";
+            photo.referrerPolicy = "no-referrer";
+            avatar.append(photo);
+          } else {
+            avatar.textContent = (review.author_name || "G").trim().charAt(0).toUpperCase();
+          }
+
+          const copy = document.createElement("div");
+          const name = document.createElement("strong");
+          name.textContent = review.author_name || "Cliente de Google";
+          const meta = document.createElement("span");
+          meta.textContent = review.relative_time_description || "Resena de Google";
+
+          copy.append(name, meta);
+          author.append(avatar, copy);
+
+          const source = document.createElement("span");
+          source.className = "review-source";
+          source.textContent = `${Number(review.rating || 5).toFixed(0)}/5 en Google`;
+
+          const text = document.createElement("p");
+          text.textContent = review.text || "Valoracion publicada en Google.";
+
+          article.append(author, source, text);
+          return article;
+        };
+
+        const renderReviews = (place) => {
+          if (ratingEl && place.rating) {
+            ratingEl.textContent = `${Number(place.rating).toFixed(1)} de 5 en Google`;
+          }
+
+          if (countEl) {
+            countEl.textContent = place.user_ratings_total
+              ? `${place.user_ratings_total} resenas verificadas en Google Maps.`
+              : "Resenas verificadas en Google Maps.";
+          }
+
+          const reviews = Array.isArray(place.reviews) ? place.reviews.filter((review) => review.text) : [];
+
+          if (!reviews.length) {
+            renderEmpty("Google no ha devuelto resenas con texto para mostrar en la web.");
+            return;
+          }
+
+          track.replaceChildren(...reviews.slice(0, 5).map(createReviewCard));
+        };
+
+        window.initGoogleReviews = () => {
+          if (!track || !window.google?.maps?.places) {
+            renderEmpty("No se pudo cargar Google Places para mostrar las resenas.");
+            return;
+          }
+
+          const service = new google.maps.places.PlacesService(document.createElement("div"));
+
+          service.findPlaceFromQuery(
+            {
+              query: config.query,
+              fields: ["place_id"],
+            },
+            (results, status) => {
+              if (status !== google.maps.places.PlacesServiceStatus.OK || !results?.[0]?.place_id) {
+                renderEmpty("No se encontro el perfil de NIGHT STAGE en Google Places.");
+                return;
+              }
+
+              service.getDetails(
+                {
+                  placeId: results[0].place_id,
+                  fields: ["name", "rating", "user_ratings_total", "reviews", "url"],
+                },
+                (place, detailsStatus) => {
+                  if (detailsStatus !== google.maps.places.PlacesServiceStatus.OK || !place) {
+                    renderEmpty("Google no devolvio resenas para mostrar en la web.");
+                    return;
+                  }
+
+                  renderReviews(place);
+                },
+              );
+            },
+          );
+        };
+
+        if (!config.hasApiKey) {
+          setStatus("Resenas verificadas en Google");
+        }
+      })();
+    </script>
+    {
+      googleMapsApiKey && (
+        <script
+          is:inline
+          src={`https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places&callback=initGoogleReviews`}
+          async
+          defer
+        ></script>
+      )
+    }
   </body>
 </html>
